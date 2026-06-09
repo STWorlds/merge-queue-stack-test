@@ -1,5 +1,7 @@
 # Merge queue results — STWorlds org (2026-06-09)
 
+> **Superseded by [REPORT.md](REPORT.md)** — kept for Phase 2 detail and PR links.
+
 **Repo:** https://github.com/STWorlds/merge-queue-stack-test  
 **Org:** [STWorlds](https://github.com/STWorlds) (free org, public repo)  
 **Merge queue:** Enabled via ruleset `develop-protection` (`merge_queue` + `strict` status checks)
