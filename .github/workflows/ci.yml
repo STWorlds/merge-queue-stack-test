@@ -10,15 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - run: echo "ok" && test -f README.md
       - name: merge-group experiment guards
         if: github.event_name == 'merge_group'
         run: |
-          if [ -f .mg-fail-solo ]; then
+          BASE="${{ github.event.merge_group.base_sha }}"
+          ADDED="$(git diff --name-only "$BASE" HEAD)"
+          if echo "$ADDED" | grep -qx '.mg-fail-solo'; then
             echo "E1: intentional solo merge_group failure"
             exit 1
           fi
-          if [ -f .mg-marker-b1 ] && [ -f .mg-marker-b2 ]; then
+          if echo "$ADDED" | grep -qx '.mg-marker-b1' && echo "$ADDED" | grep -qx '.mg-marker-b2'; then
             echo "E2: intentional combined merge_group failure"
             exit 1
           fi
