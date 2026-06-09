@@ -1,5 +1,7 @@
 # Merge Queue + Manual Stacked PR — Observations
 
+> **Superseded by [REPORT.md](REPORT.md)** — kept for Phase 1 detail and PR links.
+
 **Repo:** https://github.com/adsteventir/merge-queue-stack-test  
 **Date:** 2026-06-09  
 **Branch:** `develop` (default)  
