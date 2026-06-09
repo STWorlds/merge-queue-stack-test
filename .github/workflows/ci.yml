@@ -18,11 +18,12 @@ jobs:
         run: |
           BASE="${{ github.event.merge_group.base_sha }}"
           ADDED="$(git diff --name-only "$BASE" HEAD)"
-          if echo "$ADDED" | grep -qx '.mg-fail-solo'; then
+          if echo "$ADDED" | grep -qx '.mg-fail-solo' || echo "$ADDED" | grep -qx '.mq-e1-fail'; then
             echo "E1: intentional solo merge_group failure"
             exit 1
           fi
-          if echo "$ADDED" | grep -qx '.mg-marker-b1' && echo "$ADDED" | grep -qx '.mg-marker-b2'; then
+          if { echo "$ADDED" | grep -qx '.mg-marker-b1' && echo "$ADDED" | grep -qx '.mg-marker-b2'; } || \
+             { echo "$ADDED" | grep -qx '.mq-e2-a' && echo "$ADDED" | grep -qx '.mq-e2-b'; }; then
             echo "E2: intentional combined merge_group failure"
             exit 1
           fi
